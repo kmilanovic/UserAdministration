@@ -33,7 +33,8 @@ namespace WindowsFormsUsers
             Crud.UpdateUsers(oUser);
 
             this.FormUserList.DataGridViewUsers.DataSource = Crud.GetUsers();
-            this.Hide();
+            this.Hide();
+
         }
     }
 }

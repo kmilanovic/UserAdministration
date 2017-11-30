@@ -24,11 +24,16 @@ namespace WindowsFormsUsers
             oEditButton.Image = Image.FromFile("C:/Users/student/Source/pencil.png");
             oEditButton.Width = 20;
             oEditButton.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            DataGridViewUsers.Columns.Add(oEditButton);            DataGridViewImageColumn oDeleteButton = new DataGridViewImageColumn();
+            DataGridViewUsers.Columns.Add(oEditButton);
+
+            DataGridViewImageColumn oDeleteButton = new DataGridViewImageColumn();
             oDeleteButton.Image = Image.FromFile("C:/Users/student/Source/delete1.png");
             oDeleteButton.Width = 20;
             oDeleteButton.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            DataGridViewUsers.Columns.Add(oDeleteButton);            DataGridViewUsers.AutoGenerateColumns = false;
+            DataGridViewUsers.Columns.Add(oDeleteButton);
+
+            DataGridViewUsers.AutoGenerateColumns = false;
+
         }
 
         private void DataGridViewUsers_CellContentClick(object sender, DataGridViewCellEventArgs e)
