@@ -49,6 +49,37 @@ namespace WindowsFormsUsers
                 FormEditUser.inptEditSurname.Text = DataGridViewUsers.Rows[e.RowIndex].Cells[4].Value.ToString();
                 FormEditUser.Show();
             }
+            if (DataGridViewUsers.CurrentCell.ColumnIndex.Equals(6) && e.RowIndex != -1)
+            {
+                FormDeleteUser FormDeleteUser = new FormDeleteUser(this);
+                FormDeleteUser.nID = DataGridViewUsers.Rows[e.RowIndex].Cells[0].Value.ToString();
+                FormDeleteUser.sName = DataGridViewUsers.Rows[e.RowIndex].Cells[1].Value.ToString();
+                FormDeleteUser.sSurname = DataGridViewUsers.Rows[e.RowIndex].Cells[1].Value.ToString();
+                FormDeleteUser.sPassword = DataGridViewUsers.Rows[e.RowIndex].Cells[2].Value.ToString();
+                FormDeleteUser.sUsername = DataGridViewUsers.Rows[e.RowIndex].Cells[3].Value.ToString();
+                FormDeleteUser.Show();
+            }
+        }
+
+        private void btnDodaj_Click(object sender, EventArgs e)
+        {
+            FormAddUser AddNewUser = new FormAddUser(this);
+            AddNewUser.Show(); 
+        }
+
+        private void btnClose2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void izlazToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void izlazToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

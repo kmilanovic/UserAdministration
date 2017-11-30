@@ -15,7 +15,7 @@ namespace DataBaseService
         public List<User> GetUsers()
         {
             List<User> lUsers = new List<User>();
-            string sSqlConnectionString = "";
+            String sSqlConnectionString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
             using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
             using (DbCommand oCommand = oConnection.CreateCommand())
             {
@@ -29,9 +29,9 @@ namespace DataBaseService
                         {
                             nUserID = (int)oReader["USER_ID"],
                             sUserName = (string)oReader["USERNAME"],
-                            sUserPassword = (string)oReader["PASSWORD"],
                             sUserFirstName = (string)oReader["NAME"],
-                            sUserLastName = (string)oReader["SURNAME"]
+                            sUserLastName = (string)oReader["SURNAME"],
+                             sUserPassword = (string)oReader["PASSWORD"]
                         });
                     }
                 }
@@ -40,11 +40,40 @@ namespace DataBaseService
         }
         public void UpdateUsers(User oUser)
         {
-            string sSqlConnectionString = "";
+            String sSqlConnectionString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
             using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
             using (DbCommand oCommand = oConnection.CreateCommand())
             {
-                oCommand.CommandText = "UPDATE USERS SET NAME = '" + oUser.sUserFirstName + "', SURNAME = '" + oUser.sUserLastName + "', PASSWORD = '" + oUser.sUserPassword + "' WHERE USER_ID = "+oUser.nUserID;
+                oCommand.CommandText = "UPDATE USERS SET NAME = '" + oUser.sUserFirstName +
+               "', SURNAME = '" + oUser.sUserLastName + "', PASSWORD = '" + oUser.sUserPassword + "' WHERE  USER_ID = "+oUser.nUserID;
+                oConnection.Open();
+                using (DbDataReader oReader = oCommand.ExecuteReader())
+                {
+
+                }
+            }
+        }
+        public void DeleteUsers(User oUser)
+        {
+            String sSqlConnectionString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
+            using (DbCommand oCommand = oConnection.CreateCommand())
+            {
+                oCommand.CommandText = "DELETE FROM users WHERE USER_ID = '" + oUser.nUserID + "'";
+                oConnection.Open();
+                using (DbDataReader oReader = oCommand.ExecuteReader())
+                {
+
+                }
+            }
+        }
+        public void AddUsers(User oUser)
+        {
+            String sSqlConnectionString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+            using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
+            using (DbCommand oCommand = oConnection.CreateCommand())
+            {
+                oCommand.CommandText = "INSERT INTO users (USERNAME, PASSWORD, NAME, SURNAME) VALUES ('" + oUser.sUserName + "', '" + oUser.sUserPassword + "','" + oUser.sUserFirstName + "','" + oUser.sUserLastName + "');"; 
                 oConnection.Open();
                 using (DbDataReader oReader = oCommand.ExecuteReader())
                 {
